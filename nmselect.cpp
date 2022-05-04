@@ -13,32 +13,30 @@
 
 using namespace std;
 
-int accFlag[12] = { 0 };
-    char strShow[12] = {0};
+int acc[12] = { 0 };
+char str[12] = {0};
 
 int n, m;
 
 int cnt = 0;
 
-void dfs(int num, int depth)
+//next_permutation
+
+void dfs(int num, int dep)
 {
-
-
     for (int i = 1; i < num+1; i++) {
-        if (depth == m) {
-            cnt++;
-            printf("%s\n", strShow);
+        if (dep == m) {
+            printf("%s\n", str);
             return;
         }
-        if (accFlag[i] == 1) {
+        if (acc[i] == 1) {
             continue;
         }
+        str[dep] = '0' + i;
 
-        strShow[depth] = '0' + i;
-
-        accFlag[i] = 1;
-        dfs(num, depth + 1);
-        accFlag[i] = 0;
+        acc[i] = 1;
+        dfs(num, dep + 1);
+        acc[i] = 0;
     }
 }
 
@@ -48,7 +46,5 @@ int main(int argc, char* argv[])
     scanf("%d", &m);
 
     dfs(n, 0);
-
-    printf("%d\n", cnt);
     return 0;
 }
